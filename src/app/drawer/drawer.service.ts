@@ -15,8 +15,11 @@ export class DrawerService {
     @Inject(DrawerKeysProvider) drawerKeys: string[],
   ) {
     this.entriesToRender$ = this.activatedRoute.queryParamMap.pipe(
-      map((paramMap) => paramMap.keys.filter(key => drawerKeys.includes(key))),
-      map((drawerParamKeys) => drawerParamKeys.map((value) => this.getEntry(value))),
+      map((paramMap) =>
+        paramMap.keys
+          .filter(key => drawerKeys.includes(key))
+          .map((drawerKey) => this.getEntry(drawerKey)),
+      ),
       map((entries) => entries.sort(({ priority: aPrio = 0 }, { priority: bPrio = 0 }) => aPrio - bPrio)),
     );
   }
@@ -33,5 +36,4 @@ export class DrawerService {
     this.entriesCache.set(key, drawerEntry);
     return drawerEntry;
   }
-
 }

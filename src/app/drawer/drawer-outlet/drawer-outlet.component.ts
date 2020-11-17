@@ -3,44 +3,43 @@ import {
   ChangeDetectionStrategy,
   Component,
   ComponentFactoryResolver,
+  Inject,
   Input,
-  OnDestroy,
+  Type,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, takeUntil } from 'rxjs/operators';
-import { DrawerEntry } from '../drawer.model';
+import { map } from 'rxjs/operators';
+import { DrawerEntry, DrawerOutletContainerProvider } from '../drawer.model';
 import { DrawerBaseComponent } from '../drawer-base';
 
 @Component({
   selector: 'app-drawer-outlet',
   templateUrl: './drawer-outlet.component.html',
-  styleUrls: ['./drawer-outlet.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DrawerOutletComponent implements AfterContentInit, OnDestroy {
-  @ViewChild('viewContainer', { read: ViewContainerRef, static: true }) public viewContainerRef: ViewContainerRef | undefined;
+export class DrawerOutletComponent implements AfterContentInit {
+  @ViewChild('viewContainer', {
+    read: ViewContainerRef,
+    static: true,
+  }) public viewContainerRef: ViewContainerRef | undefined;
   @Input() entry: DrawerEntry | undefined;
 
   public drawerClosed$ = new Subject<void>();
-
-  private destroy$ = new Subject();
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private resolver: ComponentFactoryResolver,
     private router: Router,
-  ) {
-  }
+    @Inject(DrawerOutletContainerProvider) public outletContainer: Type<any>,
+  ) {}
 
   public ngAfterContentInit(): void {
     if (!this.entry || !this.viewContainerRef) {
       return;
     }
-
-    console.log('rendering...', this.entry.key);
 
     const drawer = this.createDrawer(this.entry, this.viewContainerRef);
 
@@ -50,32 +49,25 @@ export class DrawerOutletComponent implements AfterContentInit, OnDestroy {
     drawer.whenQueryParamValueChanged$ = this.activatedRoute.queryParamMap.pipe(map(params => params.get(drawerKey)));
   }
 
-  public ngOnDestroy(): void {
-    this.destroy$.next();
-  }
-
-
-  private createDrawer(entry: DrawerEntry, viewContainerRef: ViewContainerRef): DrawerBaseComponent {
-    const factory = this.resolver.resolveComponentFactory(entry.type);
-    const componentRef = viewContainerRef.createComponent(factory);
-    const drawer = componentRef.instance;
-
-    return drawer;
-  }
-
-  public close(key: string | undefined): void {
-    if (!key) {
+  public close(): void {
+    if (!this.entry) {
       return;
     }
 
     this.router.navigate([], {
       queryParams: {
-        [key]: null,
+        [this.entry.key]: null,
       },
       queryParamsHandling: 'merge',
     });
 
     this.drawerClosed$.next();
     this.drawerClosed$.complete();
+  }
+
+  private createDrawer(entry: DrawerEntry, viewContainerRef: ViewContainerRef): DrawerBaseComponent {
+    const factory = this.resolver.resolveComponentFactory(entry.type);
+    const componentRef = viewContainerRef.createComponent(factory);
+    return componentRef.instance;
   }
 }

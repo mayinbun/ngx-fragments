@@ -23,8 +23,6 @@ export class DrawerComponent implements OnInit {
 
   ngOnInit(): void {
     this.drawerService.entriesToRender$.subscribe((entries) => {
-      console.log('deb', entries);
-
       this.entries = entries;
       this.changeDetectorRef.markForCheck();
     });
