@@ -62,10 +62,12 @@ class SecondDrawer extends DrawerBaseComponent {
       {
         key: 'first-drawer',
         type: FirstDrawer,
+        priority: 2
       },
       {
         key: 'second-drawer',
         type: SecondDrawer,
+        priority: 1
       },
     ]),
   ],

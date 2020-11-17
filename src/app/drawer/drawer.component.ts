@@ -11,7 +11,7 @@ import { DrawerEntry } from './drawer.model';
   providers: [DrawerService],
 })
 export class DrawerComponent implements OnInit {
-  public entries: (DrawerEntry | undefined)[] = [];
+  public entries: DrawerEntry[] = [];
 
   constructor(
     private resolver: ComponentFactoryResolver,
@@ -30,7 +30,7 @@ export class DrawerComponent implements OnInit {
     });
   }
 
-  public trackByFn(index: number): number {
-    return index;
+  public trackByFn(index: number, entry: DrawerEntry): string {
+    return entry.key;
   }
 }

@@ -7,4 +7,5 @@ export const DrawerKeysProvider = new InjectionToken<string[]>('DrawerKeysProvid
 export interface DrawerEntry<T extends DrawerBaseComponent = DrawerBaseComponent> {
   key: string;
   type: Type<T>;
+  priority?: number;
 }
