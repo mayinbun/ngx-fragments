@@ -3,8 +3,7 @@ import { Component, NgModule, OnInit } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DrawerModule } from './drawer/drawer.module';
-import { DrawerOutletBase } from './drawer/drawer-outlet/drawer-outlet-base';
+import { DrawerModule, DrawerOutletBase } from 'drawer';
 
 @Component({
   template: '<h2>hello from test drawer</h2>',

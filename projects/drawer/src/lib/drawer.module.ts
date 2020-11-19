@@ -28,9 +28,14 @@ export class DrawerModule {
         },
         {
           provide: DrawerKeysProvider,
-          useValue: drawerEntries.map(e => e.key),
+          useValue: getDrawerKeys(drawerEntries),
         },
       ],
     };
   }
+}
+
+export function getDrawerKeys(entries: DrawerEntry[]): string[] {
+  const keys = entries.map(e => e.key);
+  return keys;
 }

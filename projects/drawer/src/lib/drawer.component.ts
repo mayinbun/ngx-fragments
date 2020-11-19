@@ -11,7 +11,7 @@ import { DrawerService } from './drawer.service';
 import { DrawerEntry } from './drawer.model';
 
 @Component({
-  selector: 'app-drawer',
+  selector: 'lib-drawer',
   templateUrl: './drawer.component.html',
   styleUrls: ['./drawer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -43,7 +43,7 @@ export class DrawerComponent implements OnInit {
       return;
     }
 
-    this.drawerService.closeDrawer(lastDrawer);
+    this.drawerService.closeDrawer(lastDrawer.key);
 
   }
 

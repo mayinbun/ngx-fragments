@@ -5,24 +5,25 @@ import {
   ComponentFactoryResolver,
   Inject,
   Input,
+  OnDestroy,
   Type,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
 import { Subject } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { filter, map, takeUntil } from 'rxjs/operators';
 import { DrawerEntry } from '../drawer.model';
 import { DrawerService } from '../drawer.service';
 import { DrawerOutletContainerProvider } from './drawer-outlet-container.component';
 import { DrawerOutletBase } from './drawer-outlet-base';
 
 @Component({
-  selector: 'app-drawer-outlet',
+  selector: 'lib-drawer-outlet',
   templateUrl: './drawer-outlet.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DrawerOutletComponent implements AfterContentInit {
+export class DrawerOutletComponent implements OnDestroy, AfterContentInit {
   @ViewChild('viewContainer', {
     read: ViewContainerRef,
     static: true,
@@ -31,8 +32,11 @@ export class DrawerOutletComponent implements AfterContentInit {
 
   public drawerClosed$ = new Subject<void>();
 
+  private destroy$ = new Subject<void>();
+
   constructor(
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     private resolver: ComponentFactoryResolver,
     private drawerService: DrawerService,
     @Inject(DrawerOutletContainerProvider) public outletContainer: Type<any>,
@@ -44,12 +48,22 @@ export class DrawerOutletComponent implements AfterContentInit {
       return;
     }
 
+    const currentDrawerKey = this.entry.key;
+
+    this.drawerService.closeDrawer$.pipe(
+      takeUntil(this.destroy$),
+      filter(key => key === currentDrawerKey),
+    ).subscribe(() => this.close());
+
     const drawer = this.createDrawer(this.entry, this.viewContainerRef);
 
     // bind properties to drawer instance
-    const drawerKey = this.entry.key;
     drawer.whenClosed$ = this.drawerClosed$.asObservable();
-    drawer.whenQueryParamValueChanged$ = this.activatedRoute.queryParamMap.pipe(map(params => params.get(drawerKey)));
+    drawer.whenQueryParamValueChanged$ = this.activatedRoute.queryParamMap.pipe(map(params => params.get(currentDrawerKey)));
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next();
   }
 
   public close(): void {
@@ -57,9 +71,15 @@ export class DrawerOutletComponent implements AfterContentInit {
       return;
     }
 
-    this.drawerService.closeDrawer(this.entry);
     this.drawerClosed$.next();
     this.drawerClosed$.complete();
+
+    this.router.navigate([], {
+      queryParams: {
+        [this.entry.key]: null,
+      },
+      queryParamsHandling: 'merge',
+    });
   }
 
   private createDrawer(entry: DrawerEntry, viewContainerRef: ViewContainerRef): DrawerOutletBase {

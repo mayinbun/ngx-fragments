@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { DrawerEntry } from './drawer.model';
@@ -8,6 +8,8 @@ import { DrawerEntriesProvider, DrawerKeysProvider } from './providers';
 @Injectable()
 export class DrawerService {
   public entriesToRender$: Observable<DrawerEntry[]>;
+
+  public closeDrawer$ = new Subject<string>();
 
   private entriesCache = new Map<string, DrawerEntry>();
 
@@ -27,17 +29,8 @@ export class DrawerService {
     );
   }
 
-  public closeDrawer(entry: DrawerEntry): void {
-    if (!entry) {
-      return;
-    }
-
-    this.router.navigate([], {
-      queryParams: {
-        [entry.key]: null,
-      },
-      queryParamsHandling: 'merge',
-    });
+  public closeDrawer(drawerKey: string): void {
+    this.closeDrawer$.next(drawerKey);
   }
 
   private getEntry(key: string): DrawerEntry {
