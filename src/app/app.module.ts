@@ -49,6 +49,19 @@ class SecondDrawer extends DrawerOutletBase {
   }
 }
 
+@Component({
+  template: `<h2 class="third-header">Third drawer title</h2>`,
+  styles: [`
+    .third-header {
+      padding: 0 24px;
+      color: darkcyan;
+    }
+  `],
+})
+export class ThirdDrawer extends DrawerOutletBase {
+
+}
+
 
 @NgModule({
   declarations: [
@@ -68,6 +81,11 @@ class SecondDrawer extends DrawerOutletBase {
         key: 'second-drawer',
         type: SecondDrawer,
         priority: 1,
+      },
+      {
+        key: 'third-drawer',
+        priority: 2,
+        type: ThirdDrawer,
       },
     ]),
   ],
