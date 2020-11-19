@@ -3,7 +3,7 @@ import { DrawerOutletComponent } from './drawer-outlet.component';
 
 @Component({
   template: `
-    <aside role="complementary" class="right-aside">
+    <aside tabindex="0" role="complementary" class="right-aside">
       <a href="javascript:void(0)"
          class="close"
          (click)="outlet.close()">
