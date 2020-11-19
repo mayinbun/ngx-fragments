@@ -10,10 +10,12 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { Subject } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { DrawerEntry, DrawerOutletContainerProvider } from '../drawer.model';
-import { DrawerBaseComponent } from '../drawer-base';
+import { DrawerEntry } from '../drawer.model';
+import { DrawerService } from '../drawer.service';
+import { DrawerOutletContainerProvider } from './drawer-outlet-container.component';
+import { DrawerOutletBase } from './drawer-outlet-base';
 
 @Component({
   selector: 'app-drawer-outlet',
@@ -32,9 +34,10 @@ export class DrawerOutletComponent implements AfterContentInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private resolver: ComponentFactoryResolver,
-    private router: Router,
+    private drawerService: DrawerService,
     @Inject(DrawerOutletContainerProvider) public outletContainer: Type<any>,
-  ) {}
+  ) {
+  }
 
   public ngAfterContentInit(): void {
     if (!this.entry || !this.viewContainerRef) {
@@ -54,18 +57,12 @@ export class DrawerOutletComponent implements AfterContentInit {
       return;
     }
 
-    this.router.navigate([], {
-      queryParams: {
-        [this.entry.key]: null,
-      },
-      queryParamsHandling: 'merge',
-    });
-
+    this.drawerService.closeDrawer(this.entry);
     this.drawerClosed$.next();
     this.drawerClosed$.complete();
   }
 
-  private createDrawer(entry: DrawerEntry, viewContainerRef: ViewContainerRef): DrawerBaseComponent {
+  private createDrawer(entry: DrawerEntry, viewContainerRef: ViewContainerRef): DrawerOutletBase {
     const factory = this.resolver.resolveComponentFactory(entry.type);
     const componentRef = viewContainerRef.createComponent(factory);
     return componentRef.instance;

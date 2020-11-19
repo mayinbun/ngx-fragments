@@ -1,16 +1,19 @@
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { DrawerEntriesProvider, DrawerEntry, DrawerKeysProvider } from './drawer.model';
+import { DrawerEntry } from './drawer.model';
+import { DrawerEntriesProvider, DrawerKeysProvider } from './providers';
 
 @Injectable()
 export class DrawerService {
-  private entriesCache = new Map<string, DrawerEntry>();
   public entriesToRender$: Observable<DrawerEntry[]>;
+
+  private entriesCache = new Map<string, DrawerEntry>();
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     @Inject(DrawerEntriesProvider) public drawerEntries: DrawerEntry[],
     @Inject(DrawerKeysProvider) drawerKeys: string[],
   ) {
@@ -24,6 +27,19 @@ export class DrawerService {
     );
   }
 
+  public closeDrawer(entry: DrawerEntry): void {
+    if (!entry) {
+      return;
+    }
+
+    this.router.navigate([], {
+      queryParams: {
+        [entry.key]: null,
+      },
+      queryParamsHandling: 'merge',
+    });
+  }
+
   private getEntry(key: string): DrawerEntry {
     const cachedDrawer = this.entriesCache.get(key);
 
@@ -32,8 +48,8 @@ export class DrawerService {
     }
 
     const drawerEntry: DrawerEntry = this.drawerEntries.find((entry) => entry.key === key) as DrawerEntry;
-
     this.entriesCache.set(key, drawerEntry);
+
     return drawerEntry;
   }
 }

@@ -2,7 +2,8 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { DrawerComponent } from './drawer.component';
 import { CommonModule } from '@angular/common';
 import { DrawerOutletComponent } from './drawer-outlet/drawer-outlet.component';
-import { DrawerEntriesProvider, DrawerEntry, DrawerKeysProvider } from './drawer.model';
+import { DrawerEntry } from './drawer.model';
+import { DrawerEntriesProvider, DrawerKeysProvider } from './providers';
 
 @NgModule({
   exports: [

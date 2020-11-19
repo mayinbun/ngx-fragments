@@ -4,7 +4,7 @@ import { Component, NgModule, OnInit } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DrawerModule } from './drawer/drawer.module';
-import { DrawerBaseComponent } from './drawer/drawer-base';
+import { DrawerOutletBase } from './drawer/drawer-outlet/drawer-outlet-base';
 
 @Component({
   template: '<h2>hello from test drawer</h2>',
@@ -14,7 +14,7 @@ import { DrawerBaseComponent } from './drawer/drawer-base';
     }
   `],
 })
-class FirstDrawer extends DrawerBaseComponent implements OnInit {
+class FirstDrawer extends DrawerOutletBase implements OnInit {
   constructor() {
     super();
   }
@@ -43,7 +43,7 @@ class FirstDrawer extends DrawerBaseComponent implements OnInit {
     </div>
   `,
 })
-class SecondDrawer extends DrawerBaseComponent {
+class SecondDrawer extends DrawerOutletBase {
   constructor() {
     super();
   }
@@ -62,12 +62,12 @@ class SecondDrawer extends DrawerBaseComponent {
       {
         key: 'first-drawer',
         type: FirstDrawer,
-        priority: 2
+        priority: 2,
       },
       {
         key: 'second-drawer',
         type: SecondDrawer,
-        priority: 1
+        priority: 1,
       },
     ]),
   ],
