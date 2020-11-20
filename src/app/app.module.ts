@@ -13,7 +13,7 @@ import { DrawerModule, DrawerOutletBase } from 'drawer';
     }
   `],
 })
-class FirstDrawer extends DrawerOutletBase implements OnInit {
+class FirstDrawerComponent extends DrawerOutletBase implements OnInit {
   constructor() {
     super();
   }
@@ -42,7 +42,7 @@ class FirstDrawer extends DrawerOutletBase implements OnInit {
     </div>
   `,
 })
-class SecondDrawer extends DrawerOutletBase {
+class SecondDrawerComponent extends DrawerOutletBase {
   constructor() {
     super();
   }
@@ -57,7 +57,7 @@ class SecondDrawer extends DrawerOutletBase {
     }
   `],
 })
-export class ThirdDrawer extends DrawerOutletBase {
+export class ThirdDrawerComponent extends DrawerOutletBase {
 
 }
 
@@ -65,7 +65,7 @@ export class ThirdDrawer extends DrawerOutletBase {
 @NgModule({
   declarations: [
     AppComponent,
-    SecondDrawer,
+    SecondDrawerComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,18 +73,18 @@ export class ThirdDrawer extends DrawerOutletBase {
     DrawerModule.forRoot([
       {
         key: 'first-drawer',
-        type: FirstDrawer,
+        type: FirstDrawerComponent,
         priority: 2,
       },
       {
         key: 'second-drawer',
-        type: SecondDrawer,
+        type: SecondDrawerComponent,
         priority: 1,
       },
       {
         key: 'third-drawer',
         priority: 2,
-        type: ThirdDrawer,
+        type: ThirdDrawerComponent,
       },
     ]),
   ],
