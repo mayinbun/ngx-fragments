@@ -108,16 +108,13 @@ export class MyCustomDrawerContainerComponent {
       {
         key: 'first-drawer',
         type: FirstDrawerComponent,
-        priority: 2,
       },
       {
         key: 'second-drawer',
         type: SecondDrawerComponent,
-        priority: 1,
       },
       {
         key: 'third-drawer',
-        priority: 2,
         type: ThirdDrawerComponent,
       },
     ], MyCustomDrawerContainerComponent),
