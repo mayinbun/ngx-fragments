@@ -48,7 +48,7 @@ import { DrawerOutletComponent } from './drawer-outlet.component';
     }
   `],
 })
-class DrawerOutletContainerComponent {
+export class DrawerOutletContainerComponent {
   constructor(public outlet: DrawerOutletComponent) {
   }
 }

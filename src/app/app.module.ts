@@ -3,7 +3,7 @@ import { Component, NgModule, OnInit } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DrawerModule, DrawerOutletBase } from 'drawer';
+import { DrawerModule, DrawerOutletBase, DrawerOutletComponent } from 'drawer';
 
 @Component({
   template: '<h2>hello from test drawer</h2>',
@@ -62,6 +62,40 @@ export class ThirdDrawerComponent extends DrawerOutletBase {
 }
 
 
+@Component({
+  template: `
+  <div class="left-aside">
+    <ng-content></ng-content>
+    <button (click)="drawer.close()">close</button>
+  </div>
+  `,
+  styles: [
+    `
+      button {
+        width: 100%;
+        background: cornflowerblue;
+      }
+      .left-aside {
+        height: 100%;
+        width: 500px;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: midnightblue;
+        color: black;
+        overflow-x: hidden;
+        padding-top: 60px;
+      }
+    `
+  ]
+})
+export class MyCustomDrawerContainerComponent {
+  constructor(public drawer: DrawerOutletComponent) {
+  }
+}
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,7 +120,7 @@ export class ThirdDrawerComponent extends DrawerOutletBase {
         priority: 2,
         type: ThirdDrawerComponent,
       },
-    ]),
+    ], MyCustomDrawerContainerComponent),
   ],
   providers: [],
   bootstrap: [AppComponent],
