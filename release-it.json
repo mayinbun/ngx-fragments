@@ -1,8 +1,25 @@
 {
+  "hooks": {},
   "plugins": {
     "@release-it/bumper": {
       "in": "projects/ngx-multi-drawer/package.json",
       "out": "projects/ngx-multi-drawer/package.json"
     }
+  },
+  "git": {
+    "requireCleanWorkingDir": true,
+    "requireBranch": false,
+    "requireUpstream": true,
+    "commit": true,
+    "push": true
+  },
+  "npm": {
+    "publish": true,
+    "publishPath": ".",
+    "tag": null,
+    "otp": null,
+    "ignoreVersion": false,
+    "skipChecks": false,
+    "timeout": 10
   }
 }
