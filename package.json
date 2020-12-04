@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "publish": "cd dist/ngx-multi-drawer && npm publish"
+    "publish": "cd dist/ngx-multi-drawer && npm publish",
+    "postpublish": "cd dist/ngx-multi-drawer && npm version patch"
   },
   "private": true,
   "dependencies": {
