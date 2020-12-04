@@ -21,13 +21,13 @@ import {
     CommonModule,
   ],
 })
-export class DrawerModule {
+export class NgxDrawerModule {
   public static forRoot(
     drawerEntries: DrawerEntry[],
     customContainer: Type<any> = DrawerOutletContainerComponent,
-  ): ModuleWithProviders<DrawerModule> {
+  ): ModuleWithProviders<NgxDrawerModule> {
     return {
-      ngModule: DrawerModule,
+      ngModule: NgxDrawerModule,
       providers: [
         {
           provide: DrawerEntriesProvider,

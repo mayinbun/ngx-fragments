@@ -3,7 +3,7 @@ import { Component, NgModule, OnInit } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DrawerModule, DrawerOutletBase, DrawerOutletComponent } from 'ngx-multi-drawer';
+import { NgxDrawerModule, DrawerOutletBase, DrawerOutletComponent } from 'ngx-multi-drawer';
 
 @Component({
   template: '<h2>hello from test drawer</h2>',
@@ -104,7 +104,7 @@ export class MyCustomDrawerContainerComponent {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DrawerModule.forRoot([
+    NgxDrawerModule.forRoot([
       {
         key: 'first-drawer',
         type: FirstDrawerComponent,
