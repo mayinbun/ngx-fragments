@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "prepublish": "cd projects/ngx-multi-drawer && npm version patch",
     "publish": "cd dist/ngx-multi-drawer && npm publish",
-    "release": "release-it --dry-run"
+    "release": "cd projects/ngx-multi-drawer && release-it --dry-run"
   },
   "private": true,
   "dependencies": {
