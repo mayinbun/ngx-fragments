@@ -9,7 +9,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prepublish": "cd projects/ngx-multi-drawer && npm version patch",
-    "publish": "cd dist/ngx-multi-drawer && npm publish"
+    "publish": "cd dist/ngx-multi-drawer && npm publish",
+    "release": "release-it --dry-run"
   },
   "private": true,
   "dependencies": {
@@ -42,6 +43,7 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "ng-packagr": "^11.0.0",
     "protractor": "~7.0.0",
+    "release-it": "^14.2.2",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~4.0.2"
