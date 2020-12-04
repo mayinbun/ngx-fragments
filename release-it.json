@@ -1,0 +1,8 @@
+{
+  "plugins": {
+    "@release-it/bumper": {
+      "in": "projects/ngx-multi-drawer/package.json",
+      "out": "projects/ngx-multi-drawer/package.json"
+    }
+  }
+}
