@@ -1,0 +1,16 @@
+name: CI
+on: [ push ]
+jobs:
+  build:
+    name: build lib
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout and install depdendencies
+      - uses: actions/checkout@v2
+      - uses: Borales/actions-yarn@v2.3.0
+      - with:
+          cmd: install
+      - uses: Borales/actions-yarn@v2.3.0
+        with:
+          cmd: build
