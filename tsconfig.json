@@ -20,9 +20,9 @@
       "dom"
     ],
     "paths": {
-      "drawer": [
-        "dist/drawer/drawer",
-        "dist/drawer"
+      "ngx-multi-drawer": [
+        "dist/ngx-multi-drawer/ngx-multi-drawer",
+        "dist/ngx-multi-drawer"
       ]
     }
   },
