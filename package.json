@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "release": "cd projects/ngx-multi-drawer && release-it --dry-run"
+    "release": "release-it --dry-run"
   },
   "private": true,
   "dependencies": {
