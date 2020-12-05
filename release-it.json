@@ -7,19 +7,11 @@
     }
   },
   "git": {
-    "requireCleanWorkingDir": true,
-    "requireBranch": false,
-    "requireUpstream": true,
     "commit": true,
     "push": true
   },
   "npm": {
     "publish": true,
-    "publishPath": ".",
-    "tag": null,
-    "otp": null,
-    "ignoreVersion": false,
-    "skipChecks": false,
-    "timeout": 10
+    "publishPath": "projects/ngx-multi-drawer/dist"
   }
 }
