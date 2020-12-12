@@ -21,8 +21,7 @@
     ],
     "paths": {
       "ngx-multi-drawer": [
-        "dist/ngx-multi-drawer/ngx-multi-drawer",
-        "dist/ngx-multi-drawer"
+        "./projects/ngx-multi-drawer/dist/ngx-multi-drawer",
       ]
     }
   },
