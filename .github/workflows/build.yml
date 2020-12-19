@@ -13,7 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Runs the Super-Linter action
       - name: Install depdendencies
         uses: Borales/actions-yarn@v2.3.0
         with:
