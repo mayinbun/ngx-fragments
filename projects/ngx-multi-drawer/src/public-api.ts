@@ -1,13 +1,13 @@
 /*
- * Public API Surface of drawer
+ * Public API
  */
 
-export * from './lib/drawer.service';
-export * from './lib/drawer.component';
-export * from './lib/drawer.module';
-export * from './lib/providers';
-export * from './lib/drawer.model';
+export * from './lib/fragments.service';
+export * from './lib/fragments.component';
+export * from './lib/fragments.module';
 
-export * from './lib/drawer-outlet/outlet-base';
-export * from './lib/drawer-outlet/drawer-outlet.component';
-export * from './lib/drawer-outlet/drawer-outlet-container.component';
+export * from './lib/fragment-outlet/fragment-outlet-base';
+export * from './lib/fragment-outlet/fragment-outlet.component';
+
+export * from './lib/providers';
+export * from './lib/model';

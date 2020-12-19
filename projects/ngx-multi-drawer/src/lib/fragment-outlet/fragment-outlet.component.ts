@@ -3,34 +3,31 @@ import {
   ChangeDetectionStrategy,
   Component,
   ComponentFactoryResolver,
-  Inject,
   Input,
   OnDestroy,
-  Type,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, takeUntil } from 'rxjs/operators';
-import { DrawerService } from '../drawer.service';
-import { DrawerOutletContainerProvider } from './drawer-outlet-container.component';
-import { OutletBase } from './outlet-base';
-import { Entry } from '../drawer.model';
+import { FragmentsService } from '../fragments.service';
+import { FragmentOutletBase } from './fragment-outlet-base';
+import { FragmentEntry } from '../model';
 
 @Component({
-  selector: 'lib-drawer-outlet',
-  templateUrl: './drawer-outlet.component.html',
+  selector: 'fragment-outlet',
+  templateUrl: './fragment-outlet.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DrawerOutletComponent implements OnDestroy, AfterContentInit {
+export class FragmentOutletComponent implements OnDestroy, AfterContentInit {
   @ViewChild('viewContainer', {
     read: ViewContainerRef,
     static: true,
   }) public viewContainerRef: ViewContainerRef | undefined;
-  @Input() entry: Entry | undefined;
+  @Input() entry: FragmentEntry | undefined;
 
-  public drawerClosed$ = new Subject<void>();
+  public whenClosed = new Subject<void>();
 
   private destroy$ = new Subject<void>();
 
@@ -38,8 +35,7 @@ export class DrawerOutletComponent implements OnDestroy, AfterContentInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private resolver: ComponentFactoryResolver,
-    private drawerService: DrawerService,
-    @Inject(DrawerOutletContainerProvider) public outletContainer: Type<any>,
+    private entriesService: FragmentsService,
   ) {
   }
 
@@ -48,18 +44,19 @@ export class DrawerOutletComponent implements OnDestroy, AfterContentInit {
       return;
     }
 
-    const currentDrawerKey = this.entry.key;
+    const currentEntryKey = this.entry.key;
 
-    this.drawerService.closeDrawer$.pipe(
+    // listen to close events from service
+    this.entriesService.closeDrawer$.pipe(
       takeUntil(this.destroy$),
-      filter(key => key === currentDrawerKey),
+      filter(key => key === currentEntryKey),
     ).subscribe(() => this.close());
 
-    const drawer = this.createDrawer(this.entry, this.viewContainerRef);
+    const cmp = this.createComponentFromEntryType(this.entry, this.viewContainerRef);
 
     // bind properties to drawer instance
-    drawer.whenClosed$ = this.drawerClosed$.asObservable();
-    drawer.whenQueryParamValueChanged$ = this.activatedRoute.queryParamMap.pipe(map(params => params.get(currentDrawerKey)));
+    cmp.whenClosed$ = this.whenClosed.asObservable();
+    cmp.whenQueryParamValueChanged$ = this.activatedRoute.queryParamMap.pipe(map(params => params.get(currentEntryKey)));
   }
 
   public ngOnDestroy(): void {
@@ -71,8 +68,8 @@ export class DrawerOutletComponent implements OnDestroy, AfterContentInit {
       return;
     }
 
-    this.drawerClosed$.next();
-    this.drawerClosed$.complete();
+    this.whenClosed.next();
+    this.whenClosed.complete();
 
     this.router.navigate([], {
       queryParams: {
@@ -82,7 +79,7 @@ export class DrawerOutletComponent implements OnDestroy, AfterContentInit {
     });
   }
 
-  private createDrawer(entry: Entry, viewContainerRef: ViewContainerRef): OutletBase {
+  private createComponentFromEntryType(entry: FragmentEntry, viewContainerRef: ViewContainerRef): FragmentOutletBase {
     const factory = this.resolver.resolveComponentFactory(entry.type);
     const componentRef = viewContainerRef.createComponent(factory);
     return componentRef.instance;

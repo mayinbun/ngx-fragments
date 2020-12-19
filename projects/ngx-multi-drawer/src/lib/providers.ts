@@ -1,9 +1,6 @@
-import { InjectionToken, Type } from '@angular/core';
-import { Entry } from './drawer.model';
+import { InjectionToken } from '@angular/core';
+import { ConfigEntry, FragmentEntry } from './model';
 
-export const UrlParamKeysProvider = new InjectionToken<Entry[]>('UrlParamKeysProvider');
-export const DrawerKeysProvider = new InjectionToken<string[]>('DrawerKeysProvider');
+export const FragmentQueryParamKeysProvider = new InjectionToken<ConfigEntry[]>('FragmentQueryParamKeysProvider');
+export const FragmentEntriesProvider = new InjectionToken<FragmentEntry[]>('FragmentEntriesProvider');
 
-export const EntriesProvider = new InjectionToken<string[]>('EntriesProvider');
-
-export const OutletContainerProvider = new InjectionToken<Type<any>>('OutletContainerProvider');

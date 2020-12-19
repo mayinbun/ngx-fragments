@@ -316,14 +316,14 @@
 </div>
 
 <div class="content" role="main">
-  <lib-drawer></lib-drawer>
+  <fragments></fragments>
 
-  <a [routerLink]="[]" [queryParams]="{'drawer:first-drawer': 'first'}" queryParamsHandling="merge">open first drawer</a>
-  <a [routerLink]="[]" [queryParams]="{'drawer:second-drawer': 'second'}" queryParamsHandling="merge">open second drawer</a>
-  <a [routerLink]="[]" [queryParams]="{'drawer:third-drawer': 'third-drawer-value'}" queryParamsHandling="merge">open third drawer</a>
-  <a [routerLink]="[]" [queryParams]="{'second-drawer': 'secondValueChanged'}" queryParamsHandling="merge">open second with different value</a>
-  <a [routerLink]="[]" [queryParams]="{'second-drawer': 'second', 'first-drawer' : 'first'}" queryParamsHandling="merge">will open second then first</a>
-  <a [routerLink]="[]" [queryParams]="{'first-drawer': 'kl1234', 'second-drawer' : 'reclaim 3/4'}" queryParamsHandling="merge">will open first then second</a>
+  <a [routerLink]="[]" [queryParams]="{'drawer:first': 'first'}" queryParamsHandling="merge">open first drawer fragment</a>
+  <a [routerLink]="[]" [queryParams]="{'drawer:second': 'second'}" queryParamsHandling="merge">open second drawer fragment</a>
+  <a [routerLink]="[]" [queryParams]="{'drawer:second': 'secondValueChanged'}" queryParamsHandling="merge">open second drawer with different value</a>
+
+  <a [routerLink]="[]" [queryParams]="{'modal:greeter': 'Hello from year 2020!'}" queryParamsHandling="merge">open a modal fragment</a>
+
   <a [routerLink]="[]" [queryParams]="{'unknownParam' : 'unknown'}" queryParamsHandling="merge">add some unknown queryparam</a>
 
 
