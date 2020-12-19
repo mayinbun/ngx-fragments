@@ -13,10 +13,10 @@ import {
 import { Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, takeUntil } from 'rxjs/operators';
-import { DrawerEntry } from '../drawer.model';
 import { DrawerService } from '../drawer.service';
 import { DrawerOutletContainerProvider } from './drawer-outlet-container.component';
-import { DrawerOutletBase } from './drawer-outlet-base';
+import { OutletBase } from './outlet-base';
+import { Entry } from '../drawer.model';
 
 @Component({
   selector: 'lib-drawer-outlet',
@@ -28,7 +28,7 @@ export class DrawerOutletComponent implements OnDestroy, AfterContentInit {
     read: ViewContainerRef,
     static: true,
   }) public viewContainerRef: ViewContainerRef | undefined;
-  @Input() entry: DrawerEntry | undefined;
+  @Input() entry: Entry | undefined;
 
   public drawerClosed$ = new Subject<void>();
 
@@ -82,7 +82,7 @@ export class DrawerOutletComponent implements OnDestroy, AfterContentInit {
     });
   }
 
-  private createDrawer(entry: DrawerEntry, viewContainerRef: ViewContainerRef): DrawerOutletBase {
+  private createDrawer(entry: Entry, viewContainerRef: ViewContainerRef): OutletBase {
     const factory = this.resolver.resolveComponentFactory(entry.type);
     const componentRef = viewContainerRef.createComponent(factory);
     return componentRef.instance;

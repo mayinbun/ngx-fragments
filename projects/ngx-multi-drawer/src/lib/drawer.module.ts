@@ -2,12 +2,13 @@ import { ModuleWithProviders, NgModule, Type } from '@angular/core';
 import { DrawerComponent } from './drawer.component';
 import { CommonModule } from '@angular/common';
 import { DrawerOutletComponent } from './drawer-outlet/drawer-outlet.component';
-import { DrawerEntry } from './drawer.model';
-import { DrawerEntriesProvider, DrawerKeysProvider } from './providers';
+import { CfgItem, TransformedEntry } from './drawer.model';
+import { EntriesProvider, UrlParamKeysProvider } from './providers';
 import {
   DrawerOutletContainerComponent,
   DrawerOutletContainerProvider,
 } from './drawer-outlet/drawer-outlet-container.component';
+import { Dictionary, flatten, mapObjIndexed, values } from 'ramda';
 
 @NgModule({
   exports: [
@@ -23,19 +24,19 @@ import {
 })
 export class NgxDrawerModule {
   public static forRoot(
-    drawerEntries: DrawerEntry[],
+    cfg: Dictionary<CfgItem>,
     customContainer: Type<any> = DrawerOutletContainerComponent,
   ): ModuleWithProviders<NgxDrawerModule> {
     return {
       ngModule: NgxDrawerModule,
       providers: [
         {
-          provide: DrawerEntriesProvider,
-          useValue: drawerEntries,
+          provide: EntriesProvider,
+          useValue: transformCfg(cfg),
         },
         {
-          provide: DrawerKeysProvider,
-          useValue: getDrawerKeys(drawerEntries),
+          provide: UrlParamKeysProvider,
+          useValue: getUrlParamKeys(cfg),
         },
         {
           provide: DrawerOutletContainerProvider,
@@ -46,7 +47,25 @@ export class NgxDrawerModule {
   }
 }
 
-export function getDrawerKeys(entries: DrawerEntry[]): string[] {
-  const keys = entries.map(e => e.key);
-  return keys;
+export function getUrlParamKeys(cfg: Dictionary<CfgItem>): string[] {
+  const prefixedParamKeys = mapObjIndexed((item, key) => {
+    return item.entries.map((entry) => `${key}:${entry.key}`);
+  }, cfg);
+
+  return flatten(values(prefixedParamKeys));
+}
+
+export function transformCfg(cfg: Dictionary<CfgItem>): TransformedEntry[] {
+  const mapped = mapObjIndexed((cfgItem, cfgKey) => {
+    return cfgItem.entries.map((entry) => {
+      return {
+        containerComponent: cfgItem.containerComponent,
+        ...entry,
+        key: `${cfgKey}:${entry.key}`,
+      };
+    });
+  }, cfg);
+
+
+  return flatten(values(mapped));
 }

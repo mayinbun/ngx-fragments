@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DrawerService } from './drawer.service';
-import { DrawerEntry } from './drawer.model';
+import { Entry } from './drawer.model';
 
 @Component({
   selector: 'lib-drawer',
@@ -18,7 +18,7 @@ import { DrawerEntry } from './drawer.model';
   providers: [DrawerService],
 })
 export class DrawerComponent implements OnInit {
-  public entries: DrawerEntry[] = [];
+  public entries: Entry[] = [];
 
   constructor(
     private resolver: ComponentFactoryResolver,
@@ -47,7 +47,7 @@ export class DrawerComponent implements OnInit {
 
   }
 
-  public trackByFn(index: number, entry: DrawerEntry): string {
+  public trackByFn(index: number, entry: Entry): string {
     return entry.key;
   }
 }

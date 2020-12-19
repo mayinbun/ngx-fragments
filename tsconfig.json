@@ -19,12 +19,6 @@
       "es2018",
       "dom"
     ],
-    "paths": {
-      "ngx-multi-drawer": [
-        "./projects/ngx-multi-drawer/dist/ngx-multi-drawer",
-        "./projects/ngx-multi-drawer/dist",
-      ]
-    }
   },
   "angularCompilerOptions": {
     "strictInjectionParameters": true,
