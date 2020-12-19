@@ -2,28 +2,31 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { DrawerEntry } from './drawer.model';
-import { DrawerEntriesProvider, DrawerKeysProvider } from './providers';
+import { Entry, TransformedEntry } from './drawer.model';
+import { EntriesProvider, UrlParamKeysProvider } from './providers';
 
 @Injectable()
 export class DrawerService {
-  public entriesToRender$: Observable<DrawerEntry[]>;
+  public entriesToRender$: Observable<Entry[]>;
 
   public closeDrawer$ = new Subject<string>();
 
-  private entriesCache = new Map<string, DrawerEntry>();
+  private entriesCache = new Map<string, Entry>();
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    @Inject(DrawerEntriesProvider) public drawerEntries: DrawerEntry[],
-    @Inject(DrawerKeysProvider) drawerKeys: string[],
+    @Inject(EntriesProvider) public transformedEntries: TransformedEntry[],
+    @Inject(UrlParamKeysProvider) urlParamKeys: string[],
   ) {
+    console.log('entries', urlParamKeys);
     this.entriesToRender$ = this.activatedRoute.queryParamMap.pipe(
-      map((paramMap) =>
-        paramMap.keys
-          .filter(key => drawerKeys.includes(key))
-          .map((drawerKey) => this.getEntry(drawerKey)),
+      map((paramMap) => {
+          console.log('map', paramMap);
+          return paramMap.keys
+            .filter(key => urlParamKeys.includes(key))
+            .map((key) => this.getEntry(key));
+        },
       ),
       map((entries) => entries.sort(({ priority: aPrio = 0 }, { priority: bPrio = 0 }) => aPrio - bPrio)),
     );
@@ -33,16 +36,16 @@ export class DrawerService {
     this.closeDrawer$.next(drawerKey);
   }
 
-  private getEntry(key: string): DrawerEntry {
+  private getEntry(key: string): Entry {
     const cachedDrawer = this.entriesCache.get(key);
 
     if (cachedDrawer) {
       return cachedDrawer;
     }
 
-    const drawerEntry: DrawerEntry = this.drawerEntries.find((entry) => entry.key === key) as DrawerEntry;
-    this.entriesCache.set(key, drawerEntry);
+    const transformed = this.transformedEntries.find((entry) => entry.key === key) as TransformedEntry;
+    this.entriesCache.set(key, transformed);
 
-    return drawerEntry;
+    return transformed;
   }
 }

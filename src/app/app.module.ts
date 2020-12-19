@@ -3,7 +3,8 @@ import { Component, NgModule, OnInit } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgxDrawerModule, DrawerOutletBase, DrawerOutletComponent } from 'ngx-multi-drawer';
+import { DrawerOutletComponent, NgxDrawerModule, OutletBase } from '../../projects/ngx-multi-drawer';
+import { ModalComponent } from './example-components/modal.component';
 
 @Component({
   template: '<h2>hello from test drawer</h2>',
@@ -13,7 +14,7 @@ import { NgxDrawerModule, DrawerOutletBase, DrawerOutletComponent } from 'ngx-mu
     }
   `],
 })
-class FirstDrawerComponent extends DrawerOutletBase implements OnInit {
+class FirstDrawerComponent extends OutletBase implements OnInit {
   constructor() {
     super();
   }
@@ -42,7 +43,7 @@ class FirstDrawerComponent extends DrawerOutletBase implements OnInit {
     </div>
   `,
 })
-class SecondDrawerComponent extends DrawerOutletBase {
+class SecondDrawerComponent extends OutletBase {
   constructor() {
     super();
   }
@@ -57,17 +58,17 @@ class SecondDrawerComponent extends DrawerOutletBase {
     }
   `],
 })
-export class ThirdDrawerComponent extends DrawerOutletBase {
+export class ThirdDrawerComponent extends OutletBase {
 
 }
 
 
 @Component({
   template: `
-  <div class="left-aside">
-    <ng-content></ng-content>
-    <button (click)="drawer.close()">close</button>
-  </div>
+    <div class="left-aside">
+      <ng-content></ng-content>
+      <button (click)="drawer.close()">close</button>
+    </div>
   `,
   styles: [
     `
@@ -75,6 +76,7 @@ export class ThirdDrawerComponent extends DrawerOutletBase {
         width: 100%;
         background: cornflowerblue;
       }
+
       .left-aside {
         height: 100%;
         width: 500px;
@@ -87,8 +89,8 @@ export class ThirdDrawerComponent extends DrawerOutletBase {
         overflow-x: hidden;
         padding-top: 60px;
       }
-    `
-  ]
+    `,
+  ],
 })
 export class MyCustomDrawerContainerComponent {
   constructor(public drawer: DrawerOutletComponent) {
@@ -104,20 +106,27 @@ export class MyCustomDrawerContainerComponent {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgxDrawerModule.forRoot([
+    NgxDrawerModule.forRoot(
       {
-        key: 'first-drawer',
-        type: FirstDrawerComponent,
-      },
-      {
-        key: 'second-drawer',
-        type: SecondDrawerComponent,
-      },
-      {
-        key: 'third-drawer',
-        type: ThirdDrawerComponent,
-      },
-    ], MyCustomDrawerContainerComponent),
+        modal: {
+          containerComponent: ModalComponent,
+          entries: [
+            {
+              key: 'first-modal',
+              type: FirstDrawerComponent,
+            },
+          ],
+        },
+        drawer: {
+          containerComponent: MyCustomDrawerContainerComponent,
+          entries: [
+            {
+              key: 'first-drawer',
+              type: FirstDrawerComponent,
+            },
+          ],
+        },
+      }),
   ],
   providers: [],
   bootstrap: [AppComponent],
