@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FragmentOutletComponent } from '../../../../../projects/ngx-multi-drawer';
+import { FragmentOutletComponent } from '../../../../../projects/ngx-fragments';
 
 @Component({
   templateUrl: './modal-container.component.html',

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgxFragmentsModule } from '../../projects/ngx-multi-drawer';
+import { NgxFragmentsModule } from '../../projects/ngx-fragments';
 import { MyCustomDrawerContainerComponent } from './example-components/containers/drawer-container.component';
 import { FirstDrawerComponent } from './example-components/drawers/first-drawer.component';
 import { SecondDrawerComponent } from './example-components/drawers/second-drawer.component';

@@ -1,10 +1,10 @@
 {
-  "name": "ngx-multi-drawer",
+  "name": "ngx-fragments",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build ngx-multi-drawer --prod",
+    "build": "ng build ngx-fragments --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",

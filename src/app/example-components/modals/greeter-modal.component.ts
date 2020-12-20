@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FragmentOutletBase } from '../../../../projects/ngx-multi-drawer';
+import { FragmentOutletBase } from '../../../../projects/ngx-fragments';
 
 @Component({
   templateUrl: './greeter-modal.component.html',

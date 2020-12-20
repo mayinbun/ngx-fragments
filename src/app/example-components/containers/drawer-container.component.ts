@@ -1,4 +1,4 @@
-import { FragmentOutletComponent } from '../../../../projects/ngx-multi-drawer';
+import { FragmentOutletComponent } from '../../../../projects/ngx-fragments';
 import { Component } from '@angular/core';
 
 @Component({

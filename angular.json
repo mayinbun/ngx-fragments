@@ -114,38 +114,38 @@
         }
       }
     },
-    "ngx-multi-drawer": {
+    "ngx-fragments": {
       "projectType": "library",
-      "root": "projects/ngx-multi-drawer",
-      "sourceRoot": "projects/ngx-multi-drawer/src",
+      "root": "projects/ngx-fragments",
+      "sourceRoot": "projects/ngx-fragments/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "projects/ngx-multi-drawer/tsconfig.lib.json",
-            "project": "projects/ngx-multi-drawer/ng-package.json",
+            "tsConfig": "projects/ngx-fragments/tsconfig.lib.json",
+            "project": "projects/ngx-fragments/ng-package.json",
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/ngx-multi-drawer/tsconfig.lib.prod.json"
+              "tsConfig": "projects/ngx-fragments/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ngx-multi-drawer/src/test.ts",
-            "tsConfig": "projects/ngx-multi-drawer/tsconfig.spec.json",
-            "karmaConfig": "projects/ngx-multi-drawer/karma.conf.js"
+            "main": "projects/ngx-fragments/src/test.ts",
+            "tsConfig": "projects/ngx-fragments/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-fragments/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/ngx-multi-drawer/tsconfig.lib.json",
-              "projects/ngx-multi-drawer/tsconfig.spec.json"
+              "projects/ngx-fragments/tsconfig.lib.json",
+              "projects/ngx-fragments/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

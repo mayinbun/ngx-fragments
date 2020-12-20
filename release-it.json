@@ -2,8 +2,8 @@
   "hooks": {},
   "plugins": {
     "@release-it/bumper": {
-      "in": "projects/ngx-multi-drawer/package.json",
-      "out": "projects/ngx-multi-drawer/package.json"
+      "in": "projects/ngx-fragments/package.json",
+      "out": "projects/ngx-fragments/package.json"
     }
   },
   "git": {
@@ -12,6 +12,6 @@
   },
   "npm": {
     "publish": true,
-    "publishPath": "projects/ngx-multi-drawer/dist"
+    "publishPath": "projects/ngx-fragments/dist"
   }
 }
