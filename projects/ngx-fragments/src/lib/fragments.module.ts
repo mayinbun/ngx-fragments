@@ -1,9 +1,10 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
-import { FragmentsComponent } from './fragments.component';
 import { CommonModule } from '@angular/common';
-import { Dictionary, Fragment } from './model';
-import { FragmentEntriesProvider, FragmentQueryParamKeysProvider } from './providers';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FragmentOutletComponent } from './fragment-outlet/fragment-outlet.component';
+import { FragmentsComponent } from './fragments.component';
+import { Dictionary, Fragment } from './model';
+import { FragmentsFeatureModule } from './modules/fragments-feature.module';
+import { FragmentEntriesProvider, FragmentFeatureEntriesProvider, FragmentQueryParamKeysProvider } from './providers';
 import { getUrlParamKeys, toFragmentEntries } from './util';
 
 @NgModule({
@@ -40,6 +41,16 @@ export class NgxFragmentsModule {
       ],
     };
   }
+
+  public static forFeature(config: Dictionary<Fragment>): ModuleWithProviders<FragmentsFeatureModule> {
+    return {
+      ngModule: FragmentsFeatureModule,
+      providers: [
+        {
+          provide: FragmentFeatureEntriesProvider,
+          useValue: toFragmentEntries(config),
+        },
+      ],
+    };
+  }
 }
-
-
