@@ -1,39 +1,6 @@
-import { getUrlParamKeys, toFragmentEntries } from './util';
+import { toFragmentEntries } from './util';
 
 describe('Util', () => {
-
-  describe('getUrlParamKeys', () => {
-    it('should return array with prefixed keys', () => {
-      const obj: any = {
-        drawer: {
-          entries: [
-            {
-              key: 'first',
-            },
-            {
-              key: 'second',
-            },
-          ],
-        },
-        modal: {
-          entries: [
-            {
-              key: 'first',
-            },
-            {
-              key: 'second',
-            },
-          ],
-        },
-      };
-
-
-      const result = getUrlParamKeys(obj);
-
-      expect(result).toEqual(['drawer:first', 'drawer:second', 'modal:first', 'modal:second']);
-    });
-  });
-
 
   describe('toFragmentEntries', () => {
     it('should return array of TransformedFragment objects', () => {

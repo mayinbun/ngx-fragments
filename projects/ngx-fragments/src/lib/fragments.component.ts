@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentFactoryResolver, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FragmentsService } from './fragments.service';
-import { ConfigEntry, FragmentEntry } from './model';
+import { FragmentEntry } from './model';
 
 @Component({
   selector: 'fragments',
@@ -40,7 +40,7 @@ export class FragmentsComponent implements OnInit {
 
   }
 
-  public trackByFn(index: number, entry: ConfigEntry): string {
+  public trackByFn(index: number, entry: FragmentEntry): string {
     return entry.key;
   }
 }

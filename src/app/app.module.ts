@@ -1,13 +1,13 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgxFragmentsModule } from '../../projects/ngx-fragments';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgxFragmentsModule } from '../../projects/ngx-fragments';
 import { MyCustomDrawerContainerComponent } from './example-components/containers/drawer-container.component';
+import { MyCustomModalContainerComponent } from './example-components/containers/modal-container/modal-container.component';
 import { FirstDrawerComponent } from './example-components/drawers/first-drawer.component';
 import { SecondDrawerComponent } from './example-components/drawers/second-drawer.component';
-import { MyCustomModalContainerComponent } from './example-components/containers/modal-container/modal-container.component';
 import { GreeterModalComponent } from './example-components/modals/greeter-modal.component';
 
 
