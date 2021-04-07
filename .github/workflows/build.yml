@@ -4,21 +4,26 @@ on: push
 
 jobs:
   build:
-    # Name the Job
-    name: Build Lib
     runs-on: ubuntu-latest
-
     steps:
-      # Checks out a copy of your repository on the ubuntu-latest machine
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install depdendencies
-        uses: Borales/actions-yarn@v2.3.0
+      - uses: actions/checkout@v2
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+      - uses: actions/setup-node@v1
         with:
-          cmd: install
+          node-version: "12.x"
+          registry-url: "https://registry.npmjs.org"
 
-      - name: Build lib
-        uses: Borales/actions-yarn@v2.3.0
-        with:
-          cmd: build
+      # Build
+      - run: npm install
+      - run: npm run release
+      - run: npm run build
+
+      # Publish
+      - run: npm run publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # Push release to GH tag
+      - run: git push --follow-tags origin main
