@@ -16,9 +16,9 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       # Build
-      - run: npm install
-      - run: npm run release
-      - run: npm run build
+      - run: yarn install
+      - run: yarn release
+      - run: yarn build
 
       # Publish
       - run: npm run publish
