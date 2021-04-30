@@ -19,6 +19,13 @@
       "es2018",
       "dom"
     ],
+    "paths": {
+      "ngx-fragments": [
+        //"dist/be-mocked/be-mocked",
+        //"dist/be-mocked",
+        "projects/ngx-fragments/src/public-api.ts"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "strictInjectionParameters": true,

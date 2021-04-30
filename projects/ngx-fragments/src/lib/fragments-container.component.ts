@@ -4,25 +4,24 @@ import { FragmentsService } from './fragments.service';
 import { FragmentEntry } from './model';
 
 @Component({
-  selector: 'fragments',
-  templateUrl: './fragments.component.html',
-  styleUrls: ['./fragments.component.scss'],
+  selector: 'ngx-fragments',
+  templateUrl: './fragments-container.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [FragmentsService],
 })
-export class FragmentsComponent implements OnInit {
+export class FragmentsContainerComponent implements OnInit {
   public entries: FragmentEntry[] = [];
 
   constructor(
     private resolver: ComponentFactoryResolver,
     private activatedRoute: ActivatedRoute,
     private changeDetectorRef: ChangeDetectorRef,
-    public entriesService: FragmentsService,
+    public fragmentsService: FragmentsService,
   ) {
   }
 
   public ngOnInit(): void {
-    this.entriesService.fragments$.subscribe((entries) => {
+    this.fragmentsService.fragments$.subscribe((entries) => {
       this.entries = entries;
       this.changeDetectorRef.markForCheck();
     });
@@ -36,7 +35,7 @@ export class FragmentsComponent implements OnInit {
       return;
     }
 
-    this.entriesService.closeDrawer(lastDrawer.key);
+    this.fragmentsService.closeDrawer(lastDrawer.key);
 
   }
 

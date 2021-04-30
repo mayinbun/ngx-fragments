@@ -17,11 +17,6 @@ export class FragmentsService implements OnDestroy {
     private activatedRoute: ActivatedRoute,
     private stateService: FragmentsStateService,
   ) {
-
-    this.stateService.state$.subscribe((f) => {
-      console.log(f);
-    });
-
     this.fragments$ = combineLatest([
       this.stateService.state$,
       this.stateService.fragmentQueryParamKeys$,
