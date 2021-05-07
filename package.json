@@ -1,10 +1,10 @@
 {
   "name": "ngx-fragments",
-  "version": "0.0.2",
+  "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build ngx-fragments --prod",
+    "build": "ng build --prod --project=ngx-fragments",
     "test": "ng test ngx-fragments --watch=false --browsers=ChromeHeadless",
     "lint": "ng lint",
     "release": "standard-version",
