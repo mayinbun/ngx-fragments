@@ -1,0 +1,14 @@
+{
+  "packageFiles": [
+    {
+      "filename": "projects/ngx-fragments/package.json",
+      "type": "json"
+    }
+  ],
+  "bumpFiles": [
+    {
+      "filename": "projects/ngx-fragments/package.json",
+      "type": "json"
+    }
+  ]
+}
