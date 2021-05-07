@@ -3,14 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { FragmentsStateService } from './fragments-state.service';
-import { FragmentEntry } from './model';
+import { FragmentEntryInternal } from './model';
 
 @Injectable()
 export class FragmentsService implements OnDestroy {
-  public fragments$: Observable<FragmentEntry[]>;
+  public fragments$: Observable<FragmentEntryInternal[]>;
   public closeDrawer$ = new Subject<string>();
 
-  private fragmentsCache = new Map<string, FragmentEntry>();
+  private fragmentsCache = new Map<string, FragmentEntryInternal>();
   private destroy$ = new Subject();
 
   constructor(
@@ -42,14 +42,14 @@ export class FragmentsService implements OnDestroy {
     this.closeDrawer$.next(drawerKey);
   }
 
-  private getFragmentEntry(key: string, state: FragmentEntry[]): FragmentEntry {
+  private getFragmentEntry(key: string, state: FragmentEntryInternal[]): FragmentEntryInternal {
     const cachedDrawer = this.fragmentsCache.get(key);
 
     if (cachedDrawer) {
       return cachedDrawer;
     }
 
-    const entry = state.find((e) => e.key === key) as FragmentEntry;
+    const entry = state.find((e) => e.key === key) as FragmentEntryInternal;
     this.fragmentsCache.set(key, entry);
 
     return entry;

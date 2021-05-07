@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentFactoryResolver, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FragmentsService } from './fragments.service';
-import { FragmentEntry } from './model';
+import { FragmentEntryInternal } from './model';
 
 @Component({
   selector: 'ngx-fragments',
@@ -10,7 +10,7 @@ import { FragmentEntry } from './model';
   providers: [FragmentsService],
 })
 export class FragmentsContainerComponent implements OnInit {
-  public entries: FragmentEntry[] = [];
+  public entries: FragmentEntryInternal[] = [];
 
   constructor(
     private resolver: ComponentFactoryResolver,
@@ -39,7 +39,7 @@ export class FragmentsContainerComponent implements OnInit {
 
   }
 
-  public trackByFn(index: number, entry: FragmentEntry): string {
+  public trackByFn(index: number, entry: FragmentEntryInternal): string {
     return entry.key;
   }
 }

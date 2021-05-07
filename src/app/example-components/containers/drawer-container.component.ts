@@ -32,6 +32,5 @@ import { Component } from '@angular/core';
   ],
 })
 export class MyCustomDrawerContainerComponent {
-  constructor(public outlet: FragmentOutletComponent) {
-  }
+  constructor(public outlet: FragmentOutletComponent) {}
 }

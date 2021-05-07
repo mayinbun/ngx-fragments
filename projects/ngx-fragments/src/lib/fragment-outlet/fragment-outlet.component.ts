@@ -13,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, takeUntil } from 'rxjs/operators';
 import { FragmentsService } from '../fragments.service';
 import { FragmentOutletBase } from './fragment-outlet-base';
-import { FragmentEntry } from '../model';
+import { FragmentEntryInternal } from '../model';
 
 @Component({
   selector: 'fragment-outlet',
@@ -25,7 +25,7 @@ export class FragmentOutletComponent implements OnDestroy, AfterContentInit {
     read: ViewContainerRef,
     static: true,
   }) public viewContainerRef: ViewContainerRef | undefined;
-  @Input() entry: FragmentEntry | undefined;
+  @Input() entry: FragmentEntryInternal | undefined;
 
   public whenClosed = new Subject<void>();
 
@@ -79,7 +79,7 @@ export class FragmentOutletComponent implements OnDestroy, AfterContentInit {
     });
   }
 
-  private createComponentFromEntryType(entry: FragmentEntry, viewContainerRef: ViewContainerRef): FragmentOutletBase {
+  private createComponentFromEntryType(entry: FragmentEntryInternal, viewContainerRef: ViewContainerRef): FragmentOutletBase {
     const factory = this.resolver.resolveComponentFactory(entry.type);
     const componentRef = viewContainerRef.createComponent(factory);
     return componentRef.instance;

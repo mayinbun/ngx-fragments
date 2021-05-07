@@ -7,15 +7,15 @@ export interface Dictionary<T> {
 
 export interface Fragment {
   containerComponent: Type<any>;
-  entries: ConfigEntry[];
+  entries: FragmentEntry[];
 }
 
-export interface ConfigEntry<T extends FragmentOutletBase = FragmentOutletBase> {
+export interface FragmentEntry<T extends FragmentOutletBase = FragmentOutletBase> {
   key: string;
   type: Type<T>;
   priority?: number;
 }
 
-export interface FragmentEntry extends ConfigEntry {
+export interface FragmentEntryInternal extends FragmentEntry {
   containerComponent: Type<any>;
 }

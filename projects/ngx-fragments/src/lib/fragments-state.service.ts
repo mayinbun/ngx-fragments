@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { FragmentEntry } from './model';
+import { FragmentEntryInternal } from './model';
 import { FragmentEntriesProvider } from './providers';
 import { getFragmentEntryKeys } from './util';
 
@@ -8,19 +8,19 @@ import { getFragmentEntryKeys } from './util';
   providedIn: 'root',
 })
 export class FragmentsStateService {
-  public state$: BehaviorSubject<FragmentEntry[]>;
+  public state$: BehaviorSubject<FragmentEntryInternal[]>;
   public fragmentQueryParamKeys$: BehaviorSubject<string[]>;
 
   constructor(
-    @Inject(FragmentEntriesProvider) private rootFragments: FragmentEntry[],
+    @Inject(FragmentEntriesProvider) private rootFragments: FragmentEntryInternal[],
   ) {
-    this.state$ = new BehaviorSubject<FragmentEntry[]>(rootFragments ?? []);
+    this.state$ = new BehaviorSubject<FragmentEntryInternal[]>(rootFragments ?? []);
     this.fragmentQueryParamKeys$ = new BehaviorSubject<string[]>(
       getFragmentEntryKeys(rootFragments),
     );
   }
 
-  public extendRootFragments(featureFragments?: FragmentEntry[]): void {
+  public extendRootFragments(featureFragments?: FragmentEntryInternal[]): void {
     this.state$.next([
       ...this.state$.getValue(),
       ...(featureFragments || []),

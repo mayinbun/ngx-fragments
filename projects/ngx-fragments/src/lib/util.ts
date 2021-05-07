@@ -1,10 +1,10 @@
-import { ConfigEntry, Dictionary, Fragment, FragmentEntry } from './model';
+import { FragmentEntry, Dictionary, Fragment, FragmentEntryInternal } from './model';
 
-export function getFragmentEntryKeys(entries: FragmentEntry[] = []): string[] {
+export function getFragmentEntryKeys(entries: FragmentEntryInternal[] = []): string[] {
   return entries.map(e => e.key);
 }
 
-export function toFragmentEntries(config: Dictionary<Fragment>): FragmentEntry[] {
+export function toFragmentEntries(config: Dictionary<Fragment>): FragmentEntryInternal[] {
   const keys = Object.keys(config);
 
   if (!keys.length) {
@@ -26,7 +26,7 @@ export function toFragmentEntries(config: Dictionary<Fragment>): FragmentEntry[]
   return Object.values(mapped).reduce((acc, item) => [...acc, ...item]);
 }
 
-export function prefixedEntryKey(fragmentKey: string, entry: ConfigEntry): string {
+export function prefixedEntryKey(fragmentKey: string, entry: FragmentEntry): string {
   return `${fragmentKey}:${entry.key}`;
 }
 
