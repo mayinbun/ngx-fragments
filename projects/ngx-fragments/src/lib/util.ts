@@ -5,14 +5,20 @@ export function getFragmentEntryKeys(entries: FragmentEntry[] = []): string[] {
 }
 
 export function toFragmentEntries(config: Dictionary<Fragment>): FragmentEntry[] {
-  const mapped = Object.keys(config).map((fragmentKey) => {
+  const keys = Object.keys(config);
+
+  if (!keys.length) {
+    return [];
+  }
+
+  const mapped = keys.map((fragmentKey) => {
     const fragment = config[fragmentKey];
 
     return fragment.entries.map((entry) => {
       return {
         containerComponent: fragment.containerComponent,
         ...entry,
-        key: toPrefixedEntryKey(fragmentKey, entry),
+        key: prefixedEntryKey(fragmentKey, entry),
       };
     });
   });
@@ -20,7 +26,7 @@ export function toFragmentEntries(config: Dictionary<Fragment>): FragmentEntry[]
   return Object.values(mapped).reduce((acc, item) => [...acc, ...item]);
 }
 
-export function toPrefixedEntryKey(fragmentKey: string, entry: ConfigEntry): string {
+export function prefixedEntryKey(fragmentKey: string, entry: ConfigEntry): string {
   return `${fragmentKey}:${entry.key}`;
 }
 

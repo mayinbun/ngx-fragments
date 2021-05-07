@@ -3,6 +3,10 @@ import { toFragmentEntries } from './util';
 describe('Util', () => {
 
   describe('toFragmentEntries', () => {
+    it('should return empty array', () => {
+      expect(toFragmentEntries({})).toEqual([]);
+    });
+
     it('should return array of TransformedFragment objects', () => {
       const obj: any = {
         drawer: {

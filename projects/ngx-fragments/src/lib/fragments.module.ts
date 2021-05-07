@@ -8,12 +8,8 @@ import { toFragmentEntries } from './util';
 @NgModule()
 export class NgxFragmentsModule {
   public static forRoot(
-    config: Dictionary<Fragment>,
+    config: Dictionary<Fragment> = {},
   ): ModuleWithProviders<FragmentsRootModule> {
-    if (!config) {
-      throw new Error('[NgxFragmentsModule.forRoot] No fragments configuration provided!');
-    }
-
     return {
       ngModule: FragmentsRootModule,
       providers: [
@@ -25,7 +21,7 @@ export class NgxFragmentsModule {
     };
   }
 
-  public static forFeature(config: Dictionary<Fragment>): ModuleWithProviders<FragmentsFeatureModule> {
+  public static forFeature(config: Dictionary<Fragment> = {}): ModuleWithProviders<FragmentsFeatureModule> {
     if (!config) {
       throw new Error('[NgxFragmentsModule.forFeature] No fragments configuration provided!');
     }
