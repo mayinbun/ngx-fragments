@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.7 (2021-05-12)
+
+
+### Features
+
+* expose snapshot value of queryParamValue ([bb04902](https://github.com/mayinbun/ngx-fragments/commit/bb049020d6d78ac868ae88dea95e04ab7e0d85bf))
+
 ### 0.0.6 (2021-05-12)
 
 ### 0.0.5 (2021-05-07)
