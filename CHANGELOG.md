@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.8 (2021-05-12)
+
+
+### Bug Fixes
+
+* use generic for outlet base prop ([147c5a4](https://github.com/mayinbun/ngx-fragments/commit/147c5a4a14305c63f738e28525b2e546487406e3))
+
 ### 0.0.7 (2021-05-12)
 
 
