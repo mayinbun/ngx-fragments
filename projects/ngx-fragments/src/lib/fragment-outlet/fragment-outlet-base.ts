@@ -1,7 +1,7 @@
 import { Subject } from 'rxjs';
 
-export abstract class FragmentOutletBase<T = any> {
+export abstract class FragmentOutletBase<QueryParamValueType = any> {
   public whenClosed$ = new Subject<void>().asObservable();
-  public queryParamValue: string | null | undefined = undefined;
-  public whenQueryParamValueChanged$ = new Subject<string | null>().asObservable();
+  public queryParamValue: QueryParamValueType | null | undefined;
+  public whenQueryParamValueChanged$ = new Subject<QueryParamValueType | null>().asObservable();
 }
