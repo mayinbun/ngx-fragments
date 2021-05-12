@@ -55,6 +55,7 @@ export class FragmentOutletComponent implements OnDestroy, AfterContentInit {
     const cmp = this.createComponentFromEntryType(this.entry, this.viewContainerRef);
 
     // bind properties to drawer instance
+    cmp.queryParamValue = this.activatedRoute.snapshot.queryParamMap.get(currentEntryKey);
     cmp.whenClosed$ = this.whenClosed.asObservable();
     cmp.whenQueryParamValueChanged$ = this.activatedRoute.queryParamMap.pipe(map(params => params.get(currentEntryKey)));
   }
