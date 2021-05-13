@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "release": "standard-version",
     "publish": "npm publish --folder projects/ngx-fragments/dist",
-    "deploy-gh-pages": "ng deploy --base-href=/ngx-fragments"
+    "deploy-gh-pages": "ng deploy --base-href=/ngx-fragments/"
   },
   "repository": {
     "url": "https://github.com/mayinbun/ngx-fragments"
