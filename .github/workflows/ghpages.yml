@@ -5,7 +5,7 @@ on:
     paths:
       - 'src/**/*'
 jobs:
-  build:
+  gh-pages:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,6 +17,10 @@ jobs:
           node-version: "12.x"
           registry-url: "https://registry.npmjs.org"
 
-      # Build
+      # Install dependencies
       - run: yarn install
-      - run: yarn build:demo
+
+      # Deploy GH Pages
+      - run: yarn deploy-gh-pages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
