@@ -5,6 +5,8 @@ This module takes care of that!
 
 This module does NOT provide the implementation of above mentioned use cases.
 
+[Demo](https://mayinbun.github.io/ngx-fragments/)
+
 ## Getting Started
 
 ```js

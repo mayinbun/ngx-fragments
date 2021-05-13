@@ -319,11 +319,9 @@
 
   <a [routerLink]="[]" [queryParams]="{'drawer:first': 'first'}" queryParamsHandling="merge">open first drawer fragment</a>
   <a [routerLink]="[]" [queryParams]="{'drawer:second': 'second'}" queryParamsHandling="merge">open second drawer fragment</a>
-  <a [routerLink]="[]" [queryParams]="{'drawer:second': 'secondValueChanged'}" queryParamsHandling="merge">open second drawer with different value</a>
+  <a [routerLink]="[]" [queryParams]="{'drawer:second': 'secondValueChanged'}" queryParamsHandling="merge">open second drawer with different query param value</a>
 
-  <a [routerLink]="[]" [queryParams]="{'modal:greeter': 'Hello from year 2020!'}" queryParamsHandling="merge">open a modal fragment</a>
-
-  <a [routerLink]="[]" [queryParams]="{'unknownParam' : 'unknown'}" queryParamsHandling="merge">add some unknown queryparam</a>
+  <a [routerLink]="[]" [queryParams]="{'modal:greeter': 'Hello from year 2021!'}" queryParamsHandling="merge">open a modal fragment</a>
 
   <a [routerLink]="['lazy-feature']">Navigate to lazy-feature</a>
   <a [routerLink]="['another-lazy']">Navigate to another-lazy</a>
