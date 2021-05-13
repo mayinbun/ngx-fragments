@@ -1,7 +1,9 @@
 name: CI
 
-on: push
-
+on:
+  push:
+    paths:
+      - 'projects/ngx-fragments/src/**/*'
 jobs:
   build:
     runs-on: ubuntu-latest

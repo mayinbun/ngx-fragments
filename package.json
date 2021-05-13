@@ -5,10 +5,11 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod --project=ngx-fragments",
+    "build:demo": "ng build --prod --project=demo",
     "test": "ng test ngx-fragments --watch=false --browsers=ChromeHeadless",
     "lint": "ng lint",
     "release": "standard-version",
-    "publish": "npm publish --folder dist"
+    "publish": "npm publish --folder projects/ngx-fragments/dist"
   },
   "dependencies": {
     "@angular/cdk": "~11.2.11",
