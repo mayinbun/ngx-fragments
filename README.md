@@ -180,7 +180,17 @@ Finally, pass the configuration to the forRoot method in your AppModule.
 
 @NgModule({
   imports: [
-    NgxFragmentsModule.forRoot()
+    NgxFragmentsModule.forRoot(configuration)
+  ]
+})
+```
+
+Or use `forFeature` for lazy loaded modules
+
+```js
+@NgModule({
+  imports: [
+    NgxFragmentsModule.forFeature(configuration)
   ]
 })
 ```
