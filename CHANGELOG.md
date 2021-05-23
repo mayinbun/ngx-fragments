@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.10 (2021-05-23)
+
+
+### Bug Fixes
+
+* throw error if feature config is not provided ([98e885a](https://github.com/mayinbun/ngx-fragments/commit/98e885aaa9c5ac27e407126135ea21edb59b68e6))
+
 ### 0.0.9 (2021-05-23)
 
 
