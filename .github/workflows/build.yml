@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     paths:
-      - 'projects/ngx-fragments/src/**/*'
+      - 'projects/ngx-fragments/**/*'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,6 +19,7 @@ jobs:
 
       # Build
       - run: yarn install
+      - run: yarn test
       - run: yarn release
       - run: yarn build
 

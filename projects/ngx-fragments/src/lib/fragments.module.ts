@@ -21,7 +21,7 @@ export class NgxFragmentsModule {
     };
   }
 
-  public static forFeature(config: Dictionary<Fragment> = {}): ModuleWithProviders<FragmentsFeatureModule> {
+  public static forFeature(config: Dictionary<Fragment>): ModuleWithProviders<FragmentsFeatureModule> {
     if (!config) {
       throw new Error('[NgxFragmentsModule.forFeature] No fragments configuration provided!');
     }

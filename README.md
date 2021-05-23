@@ -125,6 +125,7 @@ Notice that we extend `FragmentOutletBase` class. This class provides the follow
 | --------------------------- | ---------------------------------- | 
 | whenClosed$                 | Event on close                     |
 | whenQueryParamValueChanged$ | Event on query param value changed |
+| queryParamValue             | Initial query param value          |
 
 
 ### Provide the configuration
@@ -174,7 +175,7 @@ const configuration = {
 }
 ```
 
-Finally, pass the configuration to the forRoot method in your AppModule.
+Finally, pass the configuration to the `forRoot` method in your AppModule.
 
 ```js
 
@@ -185,12 +186,20 @@ Finally, pass the configuration to the forRoot method in your AppModule.
 })
 ```
 
-Or use `forFeature` for lazy loaded modules
+Or use `forFeature` for lazy loaded modules  
 
 ```js
+// In AppModule
 @NgModule({
   imports: [
-    NgxFragmentsModule.forFeature(configuration)
+    NgxFragmentsModule.forRoot() // --> configuration object is optional here
+  ]
+})
+
+// In Feature Module
+@NgModule({
+  imports: [
+    NgxFragmentsModule.forFeature(configuration) // --> configuration is REQUIRED for lazy modules
   ]
 })
 ```
