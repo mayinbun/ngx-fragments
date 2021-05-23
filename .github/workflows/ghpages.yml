@@ -4,7 +4,6 @@ on:
   push:
     paths:
       - 'src/**/*'
-      - 'package.json'
 jobs:
   gh-pages:
     runs-on: ubuntu-latest

@@ -3,9 +3,22 @@
   "version": "0.0.9",
   "peerDependencies": {
     "@angular/common": "^11.0.0",
-    "@angular/core": "^11.0.0"
+    "@angular/core": "^11.0.0",
+    "rxjs": "^6.6.0"
   },
-  "dependencies": {
-    "tslib": "^2.0.0"
+  "author": {
+    "name": "Bunyamin Yildirim",
+    "url": "https://github.com/mayinbun"
+  },
+  "keywords": [
+    "ngx-fragments",
+    "modal",
+    "popup",
+    "aside",
+    "dynamic",
+    "ui"
+  ],
+  "repository": {
+    "url": "https://github.com/mayinbun/ngx-fragments"
   }
 }
