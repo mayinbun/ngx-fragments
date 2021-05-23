@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.9 (2021-05-23)
+
+
+### Features
+
+* expose isFirstDrawer$ in outlet ([9e0570f](https://github.com/mayinbun/ngx-fragments/commit/9e0570f476ca4e9c74a767f0054aa1011ae2cf74))
+
 ### 0.0.8 (2021-05-12)
 
 
