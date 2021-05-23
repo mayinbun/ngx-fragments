@@ -1,6 +1,5 @@
-import { ComponentType } from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
-import { ApplicationRef, ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Inject, Injectable, Injector } from '@angular/core';
+import { ApplicationRef, ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Inject, Injectable, Injector, Type } from '@angular/core';
 
 /** @dynamic */
 @Injectable({
@@ -18,7 +17,7 @@ export class FragmentsFactoryService {
   }
 
   public add<T>(
-    component: ComponentType<T> | ComponentRef<T>,
+    component: Type<T> | ComponentRef<T>,
     element?: Element | string | null,
   ): ComponentRef<T> {
     const componentRef = component instanceof ComponentRef
