@@ -1,14 +1,14 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, Observable, Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { map, publishReplay, refCount, takeUntil } from 'rxjs/operators';
 import { FragmentsStateService } from './fragments-state.service';
 import { FragmentEntryInternal } from './model';
 
 @Injectable()
 export class FragmentsService implements OnDestroy {
   public fragments$: Observable<FragmentEntryInternal[]>;
-  public closeDrawer$ = new Subject<string>();
+  public closeFragment$ = new Subject<string>();
 
   private fragmentsCache = new Map<string, FragmentEntryInternal>();
   private destroy$ = new Subject();
@@ -31,6 +31,8 @@ export class FragmentsService implements OnDestroy {
             .sort(({ priority: priorityA = 0 }, { priority: priorityB = 0 }) => priorityA - priorityB);
         },
       ),
+      publishReplay(1),
+      refCount()
     );
   }
 
@@ -38,8 +40,8 @@ export class FragmentsService implements OnDestroy {
     this.destroy$.next();
   }
 
-  public closeDrawer(drawerKey: string): void {
-    this.closeDrawer$.next(drawerKey);
+  public closeFragment(drawerKey: string): void {
+    this.closeFragment$.next(drawerKey);
   }
 
   private getFragmentEntry(key: string, state: FragmentEntryInternal[]): FragmentEntryInternal {

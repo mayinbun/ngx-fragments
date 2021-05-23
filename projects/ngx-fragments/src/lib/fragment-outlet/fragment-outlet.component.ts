@@ -8,12 +8,12 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter, map, takeUntil } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { filter, first, map, takeUntil } from 'rxjs/operators';
 import { FragmentsService } from '../fragments.service';
-import { FragmentOutletBase } from './fragment-outlet-base';
 import { FragmentEntryInternal } from '../model';
+import { FragmentOutletBase } from './fragment-outlet-base';
 
 @Component({
   selector: 'fragment-outlet',
@@ -28,6 +28,7 @@ export class FragmentOutletComponent implements OnDestroy, AfterContentInit {
   @Input() entry: FragmentEntryInternal | undefined;
 
   public whenClosed = new Subject<void>();
+  public isFirstFragment$: Observable<boolean> | undefined;
 
   private destroy$ = new Subject<void>();
 
@@ -35,7 +36,7 @@ export class FragmentOutletComponent implements OnDestroy, AfterContentInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private resolver: ComponentFactoryResolver,
-    private entriesService: FragmentsService,
+    private fragmentsService: FragmentsService,
   ) {
   }
 
@@ -43,18 +44,22 @@ export class FragmentOutletComponent implements OnDestroy, AfterContentInit {
     if (!this.entry || !this.viewContainerRef) {
       return;
     }
-
     const currentEntryKey = this.entry.key;
 
-    // listen to close events from service
-    this.entriesService.closeDrawer$.pipe(
+    this.isFirstFragment$ = this.fragmentsService.fragments$.pipe(
       takeUntil(this.destroy$),
+      map(state => state[0]?.key === currentEntryKey),
+    );
+
+    // listen to close events from service
+    this.fragmentsService.closeFragment$.pipe(
+      first(),
       filter(key => key === currentEntryKey),
     ).subscribe(() => this.close());
 
     const cmp = this.createComponentFromEntryType(this.entry, this.viewContainerRef);
 
-    // bind properties to drawer instance
+    // FragmentOutlet Props
     cmp.queryParamValue = this.activatedRoute.snapshot.queryParamMap.get(currentEntryKey);
     cmp.whenClosed$ = this.whenClosed.asObservable();
     cmp.whenQueryParamValueChanged$ = this.activatedRoute.queryParamMap.pipe(map(params => params.get(currentEntryKey)));

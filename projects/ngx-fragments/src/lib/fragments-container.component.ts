@@ -17,8 +17,7 @@ export class FragmentsContainerComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private changeDetectorRef: ChangeDetectorRef,
     public fragmentsService: FragmentsService,
-  ) {
-  }
+  ) {}
 
   public ngOnInit(): void {
     this.fragmentsService.fragments$.subscribe((entries) => {
@@ -35,7 +34,7 @@ export class FragmentsContainerComponent implements OnInit {
       return;
     }
 
-    this.fragmentsService.closeDrawer(lastDrawer.key);
+    this.fragmentsService.closeFragment(lastDrawer.key);
 
   }
 
