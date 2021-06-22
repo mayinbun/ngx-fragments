@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.13 (2021-06-22)
+
+
+### Features
+
+* auto inject container to body option ([237022f](https://github.com/mayinbun/ngx-fragments/commit/237022f200aa0809e1063630c92e55b302c278a3))
+
 ### 0.0.12 (2021-05-23)
 
 ### 0.0.10 (2021-05-23)
