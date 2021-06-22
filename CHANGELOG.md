@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.14 (2021-06-22)
+
+
+### Bug Fixes
+
+* filter null qp values ([16f61db](https://github.com/mayinbun/ngx-fragments/commit/16f61db86c580fa3a386be6f778f2d99c511ae3e))
+
 ### 0.0.13 (2021-06-22)
 
 
