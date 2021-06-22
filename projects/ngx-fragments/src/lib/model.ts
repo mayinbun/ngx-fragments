@@ -19,3 +19,7 @@ export interface FragmentEntry<T extends FragmentOutletBase = FragmentOutletBase
 export interface FragmentEntryInternal extends FragmentEntry {
   containerComponent: Type<any>;
 }
+
+export interface RootModuleOptions {
+  injectToBody: boolean;
+}

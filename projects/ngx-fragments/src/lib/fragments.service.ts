@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, Observable, Subject } from 'rxjs';
-import { map, publishReplay, refCount, takeUntil } from 'rxjs/operators';
+import { map, shareReplay, takeUntil } from 'rxjs/operators';
 import { FragmentsStateService } from './fragments-state.service';
 import { FragmentEntryInternal } from './model';
 
@@ -11,7 +11,7 @@ export class FragmentsService implements OnDestroy {
   public closeFragment$ = new Subject<string>();
 
   private fragmentsCache = new Map<string, FragmentEntryInternal>();
-  private destroy$ = new Subject();
+  private unsubscribe$ = new Subject();
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -22,7 +22,6 @@ export class FragmentsService implements OnDestroy {
       this.stateService.fragmentQueryParamKeys$,
       this.activatedRoute.queryParamMap.pipe(map(paramMap => paramMap.keys)),
     ]).pipe(
-      takeUntil(this.destroy$),
       map(
         ([state, fragmentQueryParamKeys, urlQueryParamKeys]) => {
           return urlQueryParamKeys
@@ -31,13 +30,17 @@ export class FragmentsService implements OnDestroy {
             .sort(({ priority: priorityA = 0 }, { priority: priorityB = 0 }) => priorityA - priorityB);
         },
       ),
-      publishReplay(1),
-      refCount()
+      shareReplay({
+        bufferSize: 1,
+        refCount: true
+      }),
+      takeUntil(this.unsubscribe$),
     );
   }
 
   public ngOnDestroy(): void {
-    this.destroy$.next();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   public closeFragment(drawerKey: string): void {

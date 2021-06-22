@@ -47,7 +47,11 @@ import { GreeterModalComponent } from './example-components/modals/greeter-modal
             },
           ],
         },
-      }),
+      },
+      {
+        injectToBody: true
+      }
+    ),
   ],
   providers: [],
   bootstrap: [AppComponent],

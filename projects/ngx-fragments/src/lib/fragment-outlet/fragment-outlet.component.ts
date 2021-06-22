@@ -30,7 +30,7 @@ export class FragmentOutletComponent implements OnDestroy, AfterContentInit {
   public whenClosed = new Subject<void>();
   public isFirstFragment$: Observable<boolean> | undefined;
 
-  private destroy$ = new Subject<void>();
+  private unsubscribe$ = new Subject<void>();
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -47,14 +47,15 @@ export class FragmentOutletComponent implements OnDestroy, AfterContentInit {
     const currentEntryKey = this.entry.key;
 
     this.isFirstFragment$ = this.fragmentsService.fragments$.pipe(
-      takeUntil(this.destroy$),
       map(state => state[0]?.key === currentEntryKey),
+      takeUntil(this.unsubscribe$),
     );
 
     // listen to close events from service
     this.fragmentsService.closeFragment$.pipe(
       first(),
       filter(key => key === currentEntryKey),
+      takeUntil(this.unsubscribe$)
     ).subscribe(() => this.close());
 
     const cmp = this.createComponentFromEntryType(this.entry, this.viewContainerRef);
@@ -66,7 +67,8 @@ export class FragmentOutletComponent implements OnDestroy, AfterContentInit {
   }
 
   public ngOnDestroy(): void {
-    this.destroy$.next();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   public close(): void {

@@ -1,14 +1,15 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { Dictionary, Fragment } from './model';
+import { Dictionary, Fragment, RootModuleOptions } from './model';
 import { FragmentsFeatureModule } from './modules/fragments-feature.module';
 import { FragmentsRootModule } from './modules/fragments-root.module';
-import { FragmentEntriesProvider, FragmentFeatureEntriesProvider } from './providers';
+import { FragmentEntriesProvider, FragmentFeatureEntriesProvider, RootModuleOptionsProvider } from './providers';
 import { toFragmentEntries } from './util';
 
 @NgModule()
 export class NgxFragmentsModule {
   public static forRoot(
     config: Dictionary<Fragment> = {},
+    options: RootModuleOptions = { injectToBody: false },
   ): ModuleWithProviders<FragmentsRootModule> {
     return {
       ngModule: FragmentsRootModule,
@@ -16,6 +17,10 @@ export class NgxFragmentsModule {
         {
           provide: FragmentEntriesProvider,
           useValue: toFragmentEntries(config),
+        },
+        {
+          provide: RootModuleOptionsProvider,
+          useValue: options,
         },
       ],
     };

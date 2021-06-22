@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentFactoryResolver, HostListener, OnInit } from '@angular/core';
+import { OnDestroy } from '@angular/core/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs/index';
+import { takeUntil } from 'rxjs/operators';
 import { FragmentsService } from './fragments.service';
 import { FragmentEntryInternal } from './model';
 
@@ -9,8 +12,10 @@ import { FragmentEntryInternal } from './model';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [FragmentsService],
 })
-export class FragmentsContainerComponent implements OnInit {
+export class FragmentsContainerComponent implements OnInit, OnDestroy {
   public entries: FragmentEntryInternal[] = [];
+
+  private unsubscribe$ = new Subject();
 
   constructor(
     private resolver: ComponentFactoryResolver,
@@ -20,10 +25,17 @@ export class FragmentsContainerComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.fragmentsService.fragments$.subscribe((entries) => {
-      this.entries = entries;
-      this.changeDetectorRef.markForCheck();
-    });
+    this.fragmentsService.fragments$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((entries) => {
+        this.entries = entries;
+        this.changeDetectorRef.markForCheck();
+      });
+  }
+
+  public ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   @HostListener('document:keydown.esc')
@@ -35,7 +47,6 @@ export class FragmentsContainerComponent implements OnInit {
     }
 
     this.fragmentsService.closeFragment(lastDrawer.key);
-
   }
 
   public trackByFn(index: number, entry: FragmentEntryInternal): string {
