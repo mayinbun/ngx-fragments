@@ -37,8 +37,7 @@ export class FragmentOutletComponent implements OnDestroy, AfterContentInit {
     private router: Router,
     private resolver: ComponentFactoryResolver,
     private fragmentsService: FragmentsService,
-  ) {
-  }
+  ) {}
 
   public ngAfterContentInit(): void {
     if (!this.entry || !this.viewContainerRef) {
@@ -63,7 +62,10 @@ export class FragmentOutletComponent implements OnDestroy, AfterContentInit {
     // FragmentOutlet Props
     cmp.queryParamValue = this.activatedRoute.snapshot.queryParamMap.get(currentEntryKey);
     cmp.whenClosed$ = this.whenClosed.asObservable();
-    cmp.whenQueryParamValueChanged$ = this.activatedRoute.queryParamMap.pipe(map(params => params.get(currentEntryKey)));
+    cmp.whenQueryParamValueChanged$ = this.activatedRoute.queryParamMap.pipe(
+      map(params => params.get(currentEntryKey)),
+      filter(Boolean)
+    );
   }
 
   public ngOnDestroy(): void {
