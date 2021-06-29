@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.15 (2021-06-29)
+
+
+### Bug Fixes
+
+* compiling library in partial mode ([5d85fac](https://github.com/mayinbun/ngx-fragments/commit/5d85fac42c960241d988d2cd5582f4e696131607))
+
 ### 0.0.14 (2021-06-22)
 
 
