@@ -1,6 +1,6 @@
 {
   "name": "ngx-fragments",
-  "version": "0.0.15",
+  "version": "1.0.0",
   "peerDependencies": {
     "@angular/common": "^11.0.0",
     "@angular/core": "^11.0.0",
