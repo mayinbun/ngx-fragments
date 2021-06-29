@@ -52,8 +52,8 @@ export class FragmentOutletComponent implements OnDestroy, AfterContentInit {
 
     // listen to close events from service
     this.fragmentsService.closeFragment$.pipe(
-      first(),
       filter(key => key === currentEntryKey),
+      first(),
       takeUntil(this.unsubscribe$)
     ).subscribe(() => this.close());
 

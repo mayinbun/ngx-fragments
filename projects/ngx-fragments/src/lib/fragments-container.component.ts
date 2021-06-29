@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentFactoryResolver, HostListener, OnInit } from '@angular/core';
 import { OnDestroy } from '@angular/core/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs/index';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FragmentsService } from './fragments.service';
 import { FragmentEntryInternal } from './model';
