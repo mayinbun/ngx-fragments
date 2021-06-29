@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     paths:
-      - 'projects/ngx-fragments/**/*'
+      - 'projects/ngx-fragments/src/**/*'
 jobs:
   build:
     runs-on: ubuntu-latest
