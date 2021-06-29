@@ -10,7 +10,7 @@
     "postbuild": "cpy README.md ./projects/ngx-fragments/dist/",
     "test": "ng test ngx-fragments --watch=false --browsers=ChromeHeadless",
     "lint": "ng lint",
-    "release": "standard-version --release-as major",
+    "release": "standard-version",
     "release:dry": "standard-version --dry-run",
     "publish": "npm publish --folder projects/ngx-fragments/dist",
     "deploy-gh-pages": "ng deploy --base-href=/ngx-fragments/"
