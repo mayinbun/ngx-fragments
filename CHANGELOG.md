@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.0.1 (2021-06-29)
+
+
+### Bug Fixes
+
+* use detach + detectChanges to avoid unneeded cd cylces ([97b89c3](https://github.com/mayinbun/ngx-fragments/commit/97b89c3adbd68d329ef2eb77c5d195182a3bdc91))
+
 ## [1.0.0](https://github.com/mayinbun/ngx-fragments/compare/v0.0.15...v1.0.0) (2021-06-29)
 
 ### 0.0.15 (2021-06-29)
