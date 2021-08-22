@@ -20,10 +20,8 @@ export class FragmentsContainerComponent implements OnInit, OnDestroy {
   constructor(
     private activatedRoute: ActivatedRoute,
     private changeDetectorRef: ChangeDetectorRef,
-    public fragmentsService: FragmentsService,
-  ) {
-    this.changeDetectorRef.detach();
-  }
+    private fragmentsService: FragmentsService,
+  ) {}
 
   public ngOnInit(): void {
     this.fragmentsService.fragments$
